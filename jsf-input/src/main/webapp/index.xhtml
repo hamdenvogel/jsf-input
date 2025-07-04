@@ -5,7 +5,7 @@
     xmlns:f="http://java.sun.com/jsf/core"
     xmlns:h="http://java.sun.com/jsf/html"
     xmlns:p="http://primefaces.org/ui">
-     <h:form>
+     <h:form id="form1">
     <h:head>
         <title>Leitor de frases</title>
     </h:head>
@@ -15,10 +15,24 @@
 			 <h:panelGrid columns="1" cellpadding="5" style="margin: 0 auto;">
 		        <p:outputLabel value="Insira a frase" />
 		        
-		        <p:inputText id="myInput" value="#{fraseMB.inputFrase}" />
-      			<p:commandButton value="Submit" actionListener="#{fraseMB.submit}" update="@form"/>      
-		       			  	
-		       <p:outputLabel value ="#{fraseMB.palavrasRetornadas}" />      
+		        <p:inputText id="myInput" value="#{fraseMB.inputFrase}" validator="campoNaoVazioValidator"
+		         	style="width: 600px; font-size: 18px;"/>
+		        <p:message for="myInput" id="msgErro" closable="true" />
+		        		            
+      			<p:commandButton value="Submit" actionListener="#{fraseMB.submit}" update="@form" 
+      				onsuccess="setTimeout ( '$(\'#form1\\\\:msgErro\').hide()', 2000);" />   
+   	       			  	
+		       <p:outputLabel value ="#{fraseMB.palavrasRetornadas}" />  
+		       
+		       <p:dataTable value="#{fraseMB.palavras}" var="item" style="width: 610px;" 
+		       	 emptyMessage="Nenhum Registro Encontrado"
+		       	 >
+			    <p:column headerText="Ocorrências">
+			        #{item}
+			    </p:column>
+			   
+			    </p:dataTable>
+        
 	    	</h:panelGrid>
 		</p:panel>		
     </h:body>

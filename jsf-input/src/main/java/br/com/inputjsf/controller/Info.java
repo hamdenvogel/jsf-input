@@ -14,7 +14,7 @@ public class Info {
 	}
 
 	public String getMessage(){
-		return "Leitor de Frases 1.8";
+		return "Leitor de Frases 1.9";
 	}
 
 }
